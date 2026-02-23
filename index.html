@@ -3,410 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Creative Style</title>
+    <title>Sahadevan Jayaram | HR Professional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: #0a0a0a;
-            color: white;
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bf00ff;
+            --neon-pink: #ff006e;
+            --dark-bg: #0a0a0f;
+            --card-bg: #121218;
         }
 
-        /* Navigation */
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--dark-bg);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ANIMATED GRID BACKGROUND */
+        .grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 243, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        /* FLOATING PARTICLES */
+        .particle {
+            position: fixed;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue);
+            animation: float 15s infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            50% { 
+                transform: translateY(-100vh) translateX(50px);
+            }
+        }
+
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 25px 5%;
+            padding: 20px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
         }
 
         .logo {
+            font-family: 'Orbitron', sans-serif;
             font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+            color: var(--neon-blue);
+            text-shadow: 0 0 20px var(--neon-blue);
+            letter-spacing: 3px;
         }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            position: relative;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: #FF6B6B;
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 5%;
-            margin-top: 80px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #FF6B6B 0%, transparent 70%);
-            top: -250px;
-            right: -250px;
-            opacity: 0.3;
-            animation: pulse 4s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .hero-content {
-            max-width: 800px;
-            z-index: 1;
-        }
-
-        .hero .label {
-            display: inline-block;
-            padding: 8px 20px;
-            background: rgba(255, 107, 107, 0.2);
-            border: 2px solid #FF6B6B;
-            border-radius: 50px;
-            color: #FF6B6B;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            animation: slideIn 0.8s ease;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .hero h1 {
-            font-size: 90px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.1;
-            animation: slideIn 0.8s ease 0.2s backwards;
-        }
-
-        .hero .gradient-text {
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 22px;
-            color: #999;
-            margin-bottom: 40px;
-            animation: slideIn 0.8s ease 0.4s backwards;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 18px 45px;
-            background: linear-gradient(45deg, #FF6B6B, #FF8E53);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            transition: all 0.3s;
-            animation: slideIn 0.8s ease 0.6s backwards;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn:hover::before {
-            left: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 100px 5%;
-        }
-
-        .section-title {
-            font-size: 60px;
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .project-card {
-            background: #141414;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 2px solid #1a1a1a;
-            transition: all 0.4s;
-            position: relative;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
-            opacity: 0;
-            transition: opacity 0.4s;
-            z-index: 0;
-        }
-
-        .project-card:hover::before {
-            opacity: 0.1;
-        }
-
-        .project-card:hover {
-            border-color: #FF6B6B;
-            transform: translateY(-10px);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 300px;
-            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
-            position: relative;
-            z-index: 1;
-        }
-
-        .project-content {
-            padding: 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .project-content h3 {
-            font-size: 28px;
-            margin-bottom: 15px;
-        }
-
-        .project-content p {
-            color: #999;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .tags {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 6px 15px;
-            background: rgba(255, 107, 107, 0.1);
-            border: 1px solid #FF6B6B;
-            border-radius: 20px;
-            font-size: 12px;
-            color: #FF6B6B;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 150px 5%;
-            text-align: center;
-            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
-        }
-
-        .contact h2 {
-            font-size: 70px;
-            margin-bottom: 30px;
-        }
-
-        .contact p {
-            font-size: 24px;
-            margin-bottom: 50px;
-            opacity: 0.9;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-        }
-
-        .social-links a {
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 28px;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: white;
-            color: #FF6B6B;
-            transform: translateY(-5px) rotate(360deg);
-        }
-
-        /* Footer */
-        footer {
-            padding: 50px;
-            text-align: center;
-            background: #0a0a0a;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 50px;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">SN.</div>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Work</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="hero-content">
-            <span class="label">👋 AVAILABLE FOR WORK</span>
-            <h1>Building <span class="gradient-text">Digital</span><br>Experiences</h1>
-            <p>Full Stack Developer & Creative Designer based in India</p>
-            <a href="#projects" class="btn">Explore My Work</a>
-        </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="projects" id="projects">
-        <h2 class="section-title">Selected <span class="gradient-text">Projects</span></h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image"></div>
-                <div class="project-content">
-                    <h3>E-Commerce Platform</h3>
-                    <p>A modern online shopping experience with seamless checkout and payment integration.</p>
-                    <div class="tags">
-                        <span class="tag">React</span>
-                        <span class="tag">Node.js</span>
-                        <span class="tag">MongoDB</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #4ECDC4 0%, #45B7D1 100%);"></div>
-                <div class="project-content">
-                    <h3>Task Management App</h3>
-                    <p>Collaborative workspace for teams with real-time updates and notifications.</p>
-                    <div class="tags">
-                        <span class="tag">Vue.js</span>
-                        <span class="tag">Firebase</span>
-                        <span class="tag">WebSocket</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image" style="background: linear-gradient(135deg, #FFE66D 0%, #FF6B6B 100%);"></div>
-                <div class="project-content">
-                    <h3>Analytics Dashboard</h3>
-                    <p>Data visualization platform with interactive charts and reports.</p>
-                    <div class="tags">
-                        <span class="tag">React</span>
-                        <span class="tag">D3.js</span>
-                        <span class="tag">Python</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact" id="contact">
-        <h2>Let's Create Something<br>Amazing Together!</h2>
-        <p>Ready to bring your ideas to life?</p>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fas fa-envelope"></i></a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Sahadeva Njayaram. Crafted with passion.</p>
-    </footer>
-</body>
-</html>
+        nav ul 
