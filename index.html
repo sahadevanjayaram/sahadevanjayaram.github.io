@@ -22,4 +22,527 @@
             background-size: 50px 50px; animation: gridMove 20s linear infinite;
         }
         @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) 
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+        .particle {
+            position: fixed; width: 3px; height: 3px; background: var(--neon-blue); border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-blue); animation: float 15s infinite; opacity: 0.6;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; } 90% { opacity: 0.6; }
+            50% { transform: translateY(-100vh) translateX(50px); }
+        }
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 20px 5%; display: flex;
+            justify-content: space-between; align-items: center; z-index: 1000;
+            background: rgba(10, 10, 15, 0.8); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+        }
+        .logo {
+            font-family: 'Orbitron', sans-serif; font-size: 28px; font-weight: 900;
+            color: var(--neon-blue); text-shadow: 0 0 20px var(--neon-blue); letter-spacing: 3px;
+        }
+        nav ul { display: flex; list-style: none; gap: 40px; }
+        nav a {
+            color: #fff; text-decoration: none; font-weight: 600; font-size: 16px;
+            letter-spacing: 2px; position: relative; transition: all 0.3s;
+        }
+        nav a::before {
+            content: '>'; position: absolute; left: -15px; opacity: 0;
+            transition: all 0.3s; color: var(--neon-blue);
+        }
+        nav a:hover { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+        nav a:hover::before { left: -20px; opacity: 1; }
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            padding: 0 5%; margin-top: 80px; position: relative;
+        }
+        .hero-content { max-width: 900px; z-index: 1; }
+        .glitch {
+            font-family: 'Orbitron', sans-serif; font-size: 80px; font-weight: 900;
+            color: #fff; letter-spacing: 5px; position: relative; animation: glitch 3s infinite;
+        }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        .glitch::before, .glitch::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .glitch::before {
+            animation: glitchTop 2s infinite; clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+            color: var(--neon-blue);
+        }
+        .glitch::after {
+            animation: glitchBottom 2.5s infinite; clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+            color: var(--neon-pink);
+        }
+        @keyframes glitchTop {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(-3px, 0); }
+            66% { transform: translate(3px, 0); }
+        }
+        @keyframes glitchBottom {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(3px, 0); }
+            66% { transform: translate(-3px, 0); }
+        }
+        .subtitle {
+            font-size: 32px; color: var(--neon-blue); margin: 20px 0;
+            letter-spacing: 3px; animation: neonPulse 2s ease-in-out infinite;
+        }
+        @keyframes neonPulse {
+            0%, 100% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue); }
+            50% { text-shadow: 0 0 20px var(--neon-blue), 0 0 30px var(--neon-blue), 0 0 40px var(--neon-blue), 0 0 50px var(--neon-blue); }
+        }
+        .hero-text {
+            font-size: 20px; line-height: 1.8; color: #aaa;
+            margin-bottom: 40px; animation: fadeIn 1s ease 0.5s backwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .contact-info {
+            display: flex; gap: 30px; flex-wrap: wrap;
+            margin-bottom: 40px; animation: fadeIn 1s ease 0.7s backwards;
+        }
+        .contact-item { display: flex; align-items: center; gap: 10px; font-size: 16px; color: #aaa; }
+        .contact-item i { color: var(--neon-blue); font-size: 20px; }
+        .btn-group {
+            display: flex; gap: 20px; animation: fadeIn 1s ease 0.9s backwards; flex-wrap: wrap;
+        }
+        .cyber-btn {
+            padding: 15px 40px; font-family: 'Orbitron', sans-serif; font-weight: 700;
+            font-size: 16px; letter-spacing: 2px; border: 2px solid var(--neon-blue);
+            background: transparent; color: var(--neon-blue); cursor: pointer;
+            position: relative; overflow: hidden; transition: all 0.3s;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            text-decoration: none; display: inline-block;
+        }
+        .cyber-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%; background: var(--neon-blue);
+            transition: left 0.5s; z-index: -1;
+        }
+        .cyber-btn:hover::before { left: 0; }
+        .cyber-btn:hover { color: #000; box-shadow: 0 0 30px var(--neon-blue); }
+        .cyber-btn-secondary { border-color: var(--neon-pink); color: var(--neon-pink); }
+        .cyber-btn-secondary::before { background: var(--neon-pink); }
+        .cyber-btn-secondary:hover { box-shadow: 0 0 30px var(--neon-pink); }
+        .hologram {
+            position: absolute; right: 10%; top: 50%; transform: translateY(-50%);
+            width: 400px; height: 400px; border: 2px solid var(--neon-blue);
+            clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%);
+            background: linear-gradient(45deg, rgba(0, 243, 255, 0.1), rgba(191, 0, 255, 0.1));
+            animation: holoRotate 10s linear infinite; box-shadow: 0 0 50px var(--neon-blue);
+        }
+        @keyframes holoRotate {
+            0%, 100% { transform: translateY(-50%) rotateY(0deg); }
+            50% { transform: translateY(-50%) rotateY(180deg); }
+        }
+        .hologram::before {
+            content: 'HR'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-family: 'Orbitron', sans-serif; font-size: 100px; font-weight: 900;
+            color: var(--neon-blue); text-shadow: 0 0 30px var(--neon-blue); opacity: 0.3;
+        }
+        .experience { padding: 100px 5%; position: relative; }
+        .section-title {
+            font-family: 'Orbitron', sans-serif; font-size: 60px; font-weight: 900;
+            text-align: center; margin-bottom: 80px; color: var(--neon-blue);
+            text-shadow: 0 0 30px var(--neon-blue); letter-spacing: 5px;
+        }
+        .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline::before {
+            content: ''; position: absolute; left: 50%; transform: translateX(-50%);
+            width: 2px; height: 100%;
+            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple), var(--neon-pink));
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+        .timeline-item {
+            margin-bottom: 60px; position: relative; opacity: 0;
+            transform: translateY(50px); transition: all 0.6s;
+        }
+        .timeline-item.animate { opacity: 1; transform: translateY(0); }
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto; margin-right: 50%; padding-right: 50px;
+        }
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 50%; padding-left: 50px;
+        }
+        .timeline-content {
+            background: var(--card-bg); padding: 30px; border: 2px solid var(--neon-blue);
+            clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+            position: relative; transition: all 0.3s;
+        }
+        .timeline-content:hover { transform: scale(1.05); box-shadow: 0 0 40px var(--neon-blue); }
+        .timeline-dot {
+            position: absolute; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 20px; background: var(--neon-blue);
+            border-radius: 50%; box-shadow: 0 0 20px var(--neon-blue); z-index: 1;
+        }
+        .timeline-content h3 {
+            font-family: 'Orbitron', sans-serif; font-size: 24px;
+            color: var(--neon-blue); margin-bottom: 10px;
+        }
+        .timeline-content .company { font-size: 18px; color: var(--neon-pink); margin-bottom: 5px; }
+        .timeline-content .duration { font-size: 14px; color: #666; margin-bottom: 15px; }
+        .timeline-content ul { list-style: none; padding-left: 0; }
+        .timeline-content ul li {
+            padding-left: 20px; margin-bottom: 10px; position: relative;
+            color: #aaa; line-height: 1.6;
+        }
+        .timeline-content ul li::before {
+            content: '▹'; position: absolute; left: 0; color: var(--neon-blue);
+        }
+        .skills { padding: 100px 5%; background: linear-gradient(135deg, rgba(0, 243, 255, 0.05), rgba(191, 0, 255, 0.05)); }
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; max-width: 1200px; margin: 0 auto;
+        }
+        .skill-card {
+            background: var(--card-bg); padding: 40px 30px; border: 2px solid transparent;
+            clip-path: polygon(0 0, calc(100% - 30px) 0, 100% 30px, 100% 100%, 30px 100%, 0 calc(100% - 30px));
+            transition: all 0.4s; opacity: 0; transform: scale(0.9);
+        }
+        .skill-card.animate { opacity: 1; transform: scale(1); }
+        .skill-card:hover {
+            border-color: var(--neon-blue); box-shadow: 0 0 40px rgba(0, 243, 255, 0.3);
+            transform: translateY(-10px);
+        }
+        .skill-card h3 {
+            font-family: 'Orbitron', sans-serif; font-size: 22px;
+            color: var(--neon-blue); margin-bottom: 20px;
+        }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-tag {
+            padding: 8px 15px; background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-blue); color: var(--neon-blue);
+            font-size: 12px; clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+        }
+        .certifications { padding: 100px 5%; }
+        .cert-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px; max-width: 1000px; margin: 0 auto;
+        }
+        .cert-card {
+            background: var(--card-bg); padding: 40px 30px; border: 2px solid var(--neon-purple);
+            text-align: center;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.3s; opacity: 0; transform: translateY(30px); position: relative;
+        }
+        .cert-card.animate { opacity: 1; transform: translateY(0); }
+        .cert-card:hover { box-shadow: 0 0 30px var(--neon-purple); transform: translateY(-5px); }
+        .cert-card i { font-size: 50px; color: var(--neon-purple); margin-bottom: 15px; }
+        .cert-card h4 {
+            font-family: 'Orbitron', sans-serif; color: var(--neon-purple);
+            font-size: 18px; margin-bottom: 20px;
+        }
+        .cert-download {
+            padding: 10px 25px; background: transparent; border: 2px solid var(--neon-purple);
+            color: var(--neon-purple); font-family: 'Orbitron', sans-serif; font-weight: 600;
+            font-size: 12px; letter-spacing: 1px; cursor: pointer;
+            clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+            transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .cert-download:hover {
+            background: var(--neon-purple); color: #000; box-shadow: 0 0 20px var(--neon-purple);
+        }
+        .education {
+            padding: 100px 5%;
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.05), rgba(0, 243, 255, 0.05));
+        }
+        .education-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px; max-width: 1000px; margin: 0 auto;
+        }
+        .education-card {
+            background: var(--card-bg); padding: 40px; border: 2px solid var(--neon-pink);
+            clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 25px 100%, 0 calc(100% - 25px));
+            transition: all 0.3s; opacity: 0; transform: translateX(-50px);
+        }
+        .education-card.animate { opacity: 1; transform: translateX(0); }
+        .education-card:hover { box-shadow: 0 0 40px var(--neon-pink); transform: translateY(-10px); }
+        .education-card h3 {
+            font-family: 'Orbitron', sans-serif; font-size: 24px;
+            color: var(--neon-pink); margin-bottom: 15px;
+        }
+        .education-card .university { font-size: 16px; color: #aaa; margin-bottom: 10px; }
+        .education-card .year { font-size: 14px; color: #666; }
+        .contact {
+            padding: 100px 5%; text-align: center;
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(255, 0, 110, 0.1));
+        }
+        .contact-container {
+            max-width: 800px; margin: 60px auto 0; background: var(--card-bg);
+            padding: 60px 40px; border: 2px solid var(--neon-blue);
+            clip-path: polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px);
+        }
+        .contact h2 {
+            font-family: 'Orbitron', sans-serif; font-size: 50px;
+            color: var(--neon-blue); margin-bottom: 30px; text-shadow: 0 0 30px var(--neon-blue);
+        }
+        .contact p { font-size: 20px; color: #aaa; margin-bottom: 40px; }
+        .social-links { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .social-links a {
+            width: 70px; height: 70px; background: transparent; border: 2px solid var(--neon-blue);
+            clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--neon-blue); font-size: 30px; transition: all 0.3s;
+        }
+        .social-links a:hover {
+            background: var(--neon-blue); color: #000;
+            box-shadow: 0 0 40px var(--neon-blue); transform: rotate(45deg) scale(1.1);
+        }
+        footer {
+            padding: 40px; text-align: center; background: var(--card-bg);
+            border-top: 1px solid var(--neon-blue); color: #666;
+        }
+        .scroll-top {
+            position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px;
+            background: transparent; border: 2px solid var(--neon-blue);
+            clip-path: polygon(20% 0, 80% 0, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0 80%, 0 20%);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--neon-blue); font-size: 24px; cursor: pointer;
+            opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 1000;
+        }
+        .scroll-top.show { opacity: 1; visibility: visible; }
+        .scroll-top:hover { background: var(--neon-blue); color: #000; box-shadow: 0 0 40px var(--neon-blue); }
+        @media (max-width: 1024px) {
+            .hologram { display: none; }
+            .glitch { font-size: 50px; }
+            .subtitle { font-size: 24px; }
+        }
+        @media (max-width: 768px) {
+            nav ul { gap: 20px; font-size: 14px; }
+            .timeline::before { left: 30px; }
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 60px; margin-right: 0; padding-left: 30px; padding-right: 20px;
+            }
+            .timeline-dot { left: 30px; }
+            .section-title { font-size: 40px; }
+            .glitch { font-size: 40px; }
+            .contact h2 { font-size: 35px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-background"></div>
+    <div id="particles-container"></div>
+    <nav>
+        <div class="logo">SJ</div>
+        <ul>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#experience">EXPERIENCE</a></li>
+            <li><a href="#skills">SKILLS</a></li>
+            <li><a href="#certifications">CERTIFICATIONS</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="SAHADEVAN JAYARAM">SAHADEVAN JAYARAM</h1>
+            <div class="subtitle">HR COORDINATOR / HR OPERATIONS SPECIALIST</div>
+            <p class="hero-text">Experienced HR Professional specialized in HR operations, employee lifecycle management, recruitment coordination, and labor law compliance. Proven track record in optimizing HR processes and supporting organizational growth in the UAE.</p>
+            <div class="contact-info">
+                <div class="contact-item"><i class="fas fa-envelope"></i><span>sahadevanjayaram@outlook.com</span></div>
+                <div class="contact-item"><i class="fas fa-phone"></i><span>(+971) 526-957-486</span></div>
+                <div class="contact-item"><i class="fab fa-linkedin"></i><span>linkedin.com/in/SahadevanJayaraam</span></div>
+            </div>
+            <div class="btn-group">
+                <a href="#experience" class="cyber-btn">VIEW EXPERIENCE</a>
+                <a href="cv.pdf" download class="cyber-btn cyber-btn-secondary"><i class="fas fa-download"></i> DOWNLOAD CV</a>
+            </div>
+        </div>
+        <div class="hologram"></div>
+    </section>
+    <section class="experience" id="experience">
+        <h2 class="section-title">PROFESSIONAL JOURNEY</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>HR COORDINATOR / HR OPERATIONS ASSISTANT</h3>
+                    <div class="company">SKY Contracting & General Maintenance LLC | Ajman, UAE</div>
+                    <div class="duration">September 2025 – PRESENT</div>
+                    <ul>
+                        <li>Manage HR operations including onboarding, offboarding, employee records, contracts, and visa documentation</li>
+                        <li>Coordinate payroll inputs, leave administration, time & attendance records</li>
+                        <li>Support recruitment by scheduling interviews and maintaining candidate records</li>
+                        <li>Maintain HR databases, prepare reports, and support compliance reviews</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>FIBER OPTIC TECHNICIAN</h3>
+                    <div class="company">Build Max Technical Service | Ajman, UAE</div>
+                    <div class="duration">April 2022 – August 2025</div>
+                    <ul>
+                        <li>Ensured high-speed connectivity and network reliability</li>
+                        <li>Reduced downtime by 40% through proactive performance monitoring</li>
+                        <li>Conducted routine maintenance reducing network downtime by 30%</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>QUALITY ENGINEER</h3>
+                    <div class="company">Power Spack Automotive Pvt Ltd | Chennai, India</div>
+                    <div class="duration">June 2018 – February 2022</div>
+                    <ul>
+                        <li>Enhanced customer satisfaction through strict quality protocols</li>
+                        <li>Reduced product defects by 70%, enhancing production quality</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>DEVELOPMENT ENGINEER</h3>
+                    <div class="company">TI Metal Forming | Chennai, India</div>
+                    <div class="duration">June 2016 – June 2018</div>
+                    <ul>
+                        <li>Designed metal forming processes, increasing efficiency by 10%</li>
+                        <li>Engineered innovative solutions, boosting quality by 30%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="skills" id="skills">
+        <h2 class="section-title">CORE COMPETENCIES</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>HR OPERATIONS</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">HR Administration</span>
+                    <span class="skill-tag">Employee Lifecycle</span>
+                    <span class="skill-tag">Onboarding/Offboarding</span>
+                    <span class="skill-tag">HR Documentation</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>RECRUITMENT & TALENT</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Recruitment Coordination</span>
+                    <span class="skill-tag">Talent Acquisition</span>
+                    <span class="skill-tag">Interview Scheduling</span>
+                    <span class="skill-tag">Candidate Management</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>PAYROLL & COMPLIANCE</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Payroll Administration</span>
+                    <span class="skill-tag">Leave Management</span>
+                    <span class="skill-tag">Time & Attendance</span>
+                    <span class="skill-tag">Labor Law Compliance</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>HR SYSTEMS & ANALYTICS</h3>
+                <div class="skill-list">
+                    <span class="skill-tag">HRIS Management</span>
+                    <span class="skill-tag">HR Reporting</span>
+                    <span class="skill-tag">HR Analytics</span>
+                    <span class="skill-tag">Power BI</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="education">
+        <h2 class="section-title">EDUCATION</h2>
+        <div class="education-grid">
+            <div class="education-card">
+                <h3>Master of Business Administration (MBA)</h3>
+                <div class="university">Swami Vivekanand Subharti University, India</div>
+                <div class="year">December 2025 – PRESENT</div>
+            </div>
+            <div class="education-card">
+                <h3>Bachelor of Business Administration (BBA)</h3>
+                <div class="university">Swami Vivekanand Subharti University, India</div>
+                <div class="year">June 2022 – May 2025</div>
+            </div>
+        </div>
+    </section>
+    <section class="certifications" id="certifications">
+        <h2 class="section-title">CERTIFICATIONS</h2>
+        <div class="cert-grid">
+            <div class="cert-card">
+                <i class="fas fa-award"></i>
+                <h4>HR FOUNDATION COURSE</h4>
+                <a href="hr-foundation.pdf" download class="cert-download"><i class="fas fa-download"></i> VIEW CERTIFICATE</a>
+            </div>
+            <div class="cert-card">
+                <i class="fas fa-chart-line"></i>
+                <h4>HR ANALYTICS COURSE</h4>
+                <a href="hr-analytics.pdf" download class="cert-download"><i class="fas fa-download"></i> VIEW CERTIFICATE</a>
+            </div>
+            <div class="cert-card">
+                <i class="fas fa-chart-bar"></i>
+                <h4>POWER BI FOR BEGINNERS</h4>
+                <a href="powerbi.pdf" download class="cert-download"><i class="fas fa-download"></i> VIEW CERTIFICATE</a>
+            </div>
+        </div>
+    </section>
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <h2>LET'S CONNECT</h2>
+            <p>Ready to discuss HR opportunities? Get in touch!</p>
+            <div class="social-links">
+                <a href="mailto:sahadevanjayaram@outlook.com" title="Email"><i class="fas fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/SahadevanJayaraam" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="tel:+971526957486" title="Phone"><i class="fas fa-phone"></i></a>
+                <a href="https://wa.me/971526957486" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 SAHADEVAN JAYARAM | HR PROFESSIONAL | CRAFTED WITH FUTURE TECH</p>
+    </footer>
+    <div class="scroll-top" id="scrollTop"><i class="fas fa-chevron-up"></i></div>
+    <script>
+        const particlesContainer = document.getElementById('particles-container');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('animate');
+            });
+        }, observerOptions);
+        document.querySelectorAll('.timeline-item, .skill-card, .cert-card, .education-card').forEach(el => observer.observe(el));
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('show', window.pageYOffset > 300);
+        });
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        const glitchElement = document.querySelector('.glitch');
+        glitchElement.addEventListener('mouseenter', () => glitchElement.style.animation = 'glitch 0.3s infinite');
+        glitchElement.addEventListener('mouseleave', () => glitchElement.style.animation = 'glitch 3s infinite');
+    </script>
+</body>
+</html>
